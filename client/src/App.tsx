@@ -18,7 +18,7 @@ function App() {
     new CRDTDocument("agent1", "Hello, world!"),
     node2
   );
-  const tree = new CRDTTree([], { agent1: 0, agent2: 0, agent3: 0 }, []);
+  const tree = new CRDTTree([], { agent1: 0, agent2: 0, agent3: 0 }, [], "boss");
   tree.insert(node1);
   tree.insert(node2);
   tree.insert(node3);

@@ -1,5 +1,5 @@
 import type { Id, Version } from "./shared";
-import type { CRDTDocument } from "./CRDTText";
+import { CRDTDocument } from "./CRDTText";
 
 export class Node {
   id: Id;
@@ -57,11 +57,11 @@ export class CRDTTree {
   cursor: Cursor;
   root: Node;
 
-  constructor(nodes: Node[] = [], version: Version, cursor: Cursor) {
+  constructor(nodes: Node[] = [], version: Version, cursor: Cursor, agent: string = "default") {
     this.nodes = nodes;
     this.version = version;
     this.cursor = cursor;
-    this.root = new Node();
+    this.root = new Node(agent, new CRDTDocument(agent, ""), null);
   }
 
   insert(newNode: Node) {
