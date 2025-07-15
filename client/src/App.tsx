@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { CRDTTree, Node } from "./types/CRDTTree";
+import { CRDTDocument } from "./types/CRDTText";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const node1 = new Node(
+    "agent1",
+    new CRDTDocument("agent1", "Hello, world!"),
+    null
+  );
+  const node2 = new Node(
+    "agent2",
+    new CRDTDocument("agent2", "Hello, world!"),
+    node1
+  );
+  const node3 = new Node(
+    "agent3",
+    new CRDTDocument("agent1", "Hello, world!"),
+    node2
+  );
+  const tree = new CRDTTree([], { agent1: 0, agent2: 0, agent3: 0 }, []);
+  tree.insert(node1);
+  tree.insert(node2);
+  tree.insert(node3);
+
+  console.log(tree);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Hello World</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
